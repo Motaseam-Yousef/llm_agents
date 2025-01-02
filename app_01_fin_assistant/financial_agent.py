@@ -7,8 +7,6 @@ import openai
 import os
 from dotenv import load_dotenv
 load_dotenv()
-openai.api_key=os.getenv("OPENAI_API_KEY")
-# groq = os.getenv("GROQ_API_KEY")
 
 ## web search agent
 web_search_agent=Agent(
@@ -37,6 +35,7 @@ finance_agent=Agent(
 
 # multi agents ---> Team
 multi_ai_agent=Agent(
+    model=Groq(id="llama-3.1-70b-versatile"),
     team=[web_search_agent,finance_agent],
     instructions=["Always include sources","Use table to display the data"],
     show_tool_calls=True,
